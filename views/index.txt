@@ -1,0 +1,101 @@
+STAGE ENUM
+-----------------------
+| Num | Name          |
+|---------------------|
+| 0   | Qualification |
+| 1   | Quarterfinal  |
+| 2   | QF Tiebreaker |
+| 3   | Semifinal     |
+| 4   | SF Tiebreaker |
+| 5   | Final         |
+-----------------------
+
+================================================================================
+
+GET /scout/:year[/:event][/:stage][/:match]
+
+    DESCRIPTION
+    ==============
+    Get all submitted forms for a specific year, event, stage, and match. All
+    parameters except :year are optional.
+
+    PARAMETERS
+    ==============
+    - :year
+        - the year of the forms being looked for
+        - e.g. "2016"
+    - :event (OPTIONAL)
+        - the shorthand code for the event of the forms being looked for
+        - e.g. "orphi"
+    - :stage (OPTIONAL)
+        - the numeric stage value (see above) of the forms being looked for
+    - :match (OPTIONAL)
+        - the match number of the forms being looked for
+
+    RESULT
+    ==============
+    - success
+        - whether the request was successful or not
+    - forms
+        - an array of retrieved forms
+
+    EXAMPLE
+    ==============
+    GET /scout/2016/orphi/0/1
+
+    {
+      "success": true,
+      "forms": [
+        {
+          "_id": "57216d1590836cae15a4e46b",
+          "year": "2016",
+          "event": "orphi",
+          "stage": "0",
+          "match": "1",
+          "data": {
+            "example": true,
+            "real": false
+          }
+        }
+      ]
+    }
+
+
+-------------------------------------------------------------
+
+
+POST /scout/:year/:event/:stage/:match
+
+    DESCRIPTION
+    ==============
+    Submit data for the specified year, event, stage, and match. The body of
+    this request will be added to the database as the form's data.
+
+    PARAMETERS
+    ==============
+    - :year
+        - the year of the forms being looked for
+        - e.g. "2016"
+    - :event
+        - the shorthand code for the event of the forms being looked for
+        - e.g. "orphi"
+    - :stage
+        - the numeric stage value (see above) of the forms being looked for
+    - :match
+        - the match number of the forms being looked for
+
+    RESULT
+    ==============
+    - success
+        - whether the request was successful or not
+    - id
+        - the id of the newly created form
+
+    EXAMPLE
+    ==============
+    POST /scout/2016/orphi/0/1
+
+    {
+      "success": true,
+      "id": "57216d1590836cae15a4e46b"
+    }
