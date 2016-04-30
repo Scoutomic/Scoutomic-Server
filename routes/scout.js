@@ -62,7 +62,7 @@ module.exports = function() {
 					'id': data._id
 				});
 			}
-		})
+		});
     });
 
     return router;
